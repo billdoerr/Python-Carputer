@@ -27,9 +27,9 @@ import logging
 
 
 # Define some constants
-CHANNEL: int = 25   # Pinout #37, GPIO Pin #25
-TIMEOUT: int = 20
-BUTTON_PRESSED_TIME: int = 3   # Amount of time button must be pressed
+CHANNEL = 26   # Pinout #37, GPIO #26
+TIMEOUT = 20
+BUTTON_PRESSED_TIME = 3   # Amount of time button must be pressed
 
 
 # Log file initialization
@@ -92,7 +92,7 @@ def get_nodes():
 # Sends shutdown command to specified ip
 def shutdown_node(ip):
     ssh = paramiko.SSHClient()
-    is_connected = False
+    isconnected = False
     try:
         # Sure ain't very secure
         ssh.connect(ip, username='pi', password='scoobydoo', timeout=TIMEOUT)

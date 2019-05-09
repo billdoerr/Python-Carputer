@@ -16,7 +16,7 @@ from time import sleep
 
 
 # Define some constants
-CHANNEL = 13   # Pinout #37, GPIO Pin #25
+CHANNEL = 13   # Pinout #13, GPIO #27
 HEARTBEAT = 1  # Value in seconds
 
 
@@ -50,6 +50,7 @@ def main():
         pass
 
     finally:
+        GPIO.output(CHANNEL, GPIO.LOW)
         GPIO.cleanup()  # This ensures a clean exit.  Enables all pins for INPUT, but only for this program.
 
 
