@@ -71,21 +71,25 @@ def gpio_init():
 
 # Parses Ip's from dns lease file
 def get_nodes():
-    # filename = ''/var/lib/misc/dnsmasq.leases
-    filename = '/home/pi/python/dnsmasq.leases'
+    filename = '/var/lib/misc/dnsmasq.leases'
+    # filename = '/home/pi/python/dnsmasq.leases'
     nodes = []
     try:
         leasefile = list(open(filename, 'r').read().split('\n'))
+        logger.info("Lease file opened:  " + str(leasefile))
         for entry in leasefile:
             ips = re.findall(r'[0-9]+(?:\.[0-9]+){3}', entry)
             for ip in ips:
+                logger.info("Ip added to nodes:  " + ip)
                 nodes.append(ip)
     except IOError:
         logger.error("Unable to open file:  " + filename)
     finally:
-        if not nodes:   # empty sequences are false
+        if nodes:   # empty sequences are false
+            logger.info("Nodes returned:  " + str(nodes))
             return nodes
         else:
+            logger.info("Nodes returned:  None")
             return None
 
 
@@ -126,23 +130,21 @@ def button_press_callback(channel):
 
     logger.info('Button pressed')
 
-    pressed_time = datetime.datetime.now()
+    pressed_time_start = datetime.datetime.now()
 
     while not GPIO.input(channel):
-        sleep(.5)
+        pressed_time_total = (datetime.datetime.now() - pressed_time_start).seconds
 
-    pressed_time = (datetime.datetime.now() - pressed_time).seconds
-
-    # Must hold button down for period of time
-    if pressed_time > BUTTON_PRESSED_TIME:
-        logger.info("Shutting down nodes.")
-        # Shutdown slave nodes
-        shutdown_nodes()
-        # Shutdown master node
-        logger.info("Shutting down master node.")
-        subprocess.call(['sudo', 'shutdown', '-h', 'now'], shell=False)
-    else:
-        logger.info("Button was not pressed long enough to perform shutdown.")
+        # Must hold button down for period of time
+        if pressed_time_total > BUTTON_PRESSED_TIME:
+            logger.info("Shutting down nodes.")
+            # Shutdown slave nodes
+            shutdown_nodes()
+            # Shutdown master node
+            logger.info("Shutting down master node.")
+            subprocess.call(['sudo', 'shutdown', '-h', 'now'], shell=False)
+        else:
+            logger.info("Button was not pressed long enough to perform shutdown.")
 
     # Re-enable callback if button press too short or shutdown failed for some reason
     GPIO.add_event_detect(CHANNEL, GPIO.FALLING, callback=button_press_callback, bouncetime=200)
