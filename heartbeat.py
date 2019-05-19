@@ -16,8 +16,8 @@ from time import sleep
 
 
 # Define some constants
-CHANNEL = 13   # Pinout #13, GPIO #27
-HEARTBEAT = 1  # Value in seconds
+CHANNEL = 13        # Pinout #13, GPIO #27
+HEARTBEAT = 0.5     # Value in seconds
 
 
 # GPIO initialization
@@ -33,7 +33,7 @@ def main():
     gpio_init()
 
     try:
-        # Loop while power if on
+        # Loop while computer's power is on
         while True:
             GPIO.output(CHANNEL, GPIO.HIGH)
             sleep(HEARTBEAT)
@@ -56,4 +56,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

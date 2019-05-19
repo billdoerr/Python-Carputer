@@ -2,7 +2,9 @@
   <dictionary name="bdoerr">
     <words>
       <w>carputer</w>
+      <w>doerr</w>
       <w>gpio</w>
+      <w>pinout</w>
     </words>
   </dictionary>
 </component>

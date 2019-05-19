@@ -16,7 +16,7 @@ All notable changes to this Python Carputer project will be documented in this f
 #### Removed
 
 ## [Released]
-### v1.0 (9May2019)
+### v1.0 (17May2019)
 #### Added
 - [x]  listen_for_shutdown.py - Python script that listens for button press and after short period, ~5 seconds, will issue a shutdown command to slave and master nodes.
         Bash shell script also included so that this starts upon boot-up.
@@ -34,6 +34,7 @@ All notable changes to this Python Carputer project will be documented in this f
 		• cd /var/log/carputer/
 		• ls
         • tail -f listen_for_shutdown.log
+        
 - [x] heartbeat.py - Python script that turns on/off led once per second to indicate that system is running.
         Bash shell script also included so that this starts upon boot-up.
 
@@ -49,7 +50,6 @@ All notable changes to this Python Carputer project will be documented in this f
 		• cd /var/log/carputer/
 		• ls
 		• tail -f heartbeat.log
-
 
 #### Changed
 #### Removed
