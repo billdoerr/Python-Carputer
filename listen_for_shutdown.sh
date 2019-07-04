@@ -18,8 +18,6 @@
 
 start() {
     echo "Starting listen_for_shutdown.py..."
-    # Remove log file upon start.  Used only for debugging.
-    sudo rm -f /var/log/carputer/listen_for_shutdown.log
     python3 /usr/local/bin/listen_for_shutdown.py &
     return
 }

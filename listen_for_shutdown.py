@@ -15,7 +15,7 @@
     https://www.daniweb.com/programming/software-development/threads/507019/python-program-to-extract-ip-addresses-from-a-log-file
 """
 
-__version__ = '1.0'
+__version__ = '1.1'
 __author__ = 'Bill Doerr'
 
 
@@ -41,24 +41,23 @@ DELAY_FAST = 0.1            # Value in seconds
 # Log file initialization
 def log_init():
     global logger
-    # Set up logging to file
-    logging.basicConfig(
-        filename='/var/log/carputer/listen_for_shutdown.log',
-        level=logging.INFO,
-        format='[%(asctime)s] {%(pathname)s:%(lineno)d} %(levelname)s - %(message)s',
-        datefmt='%H:%M:%S'
-    )
+
+    logger = logging.getLogger(__name__)
+    logger.setLevel(logging.INFO)
+
+    formatter = logging.Formatter('%(asctime)s:%(levelname)s:\t%(message)s', '%H:%M:%S')
+
+    file_handler = logging.FileHandler('/var/log/carputer/listen_for_shutdown.log', 'w')
+    file_handler.setFormatter(formatter)
+
+    logger.addHandler(file_handler)
 
     # Set up logging to console
     console = logging.StreamHandler()
     console.setLevel(logging.DEBUG)
-    # Set a format which is simpler for console use
-    formatter = logging.Formatter('%(name)-12s: %(levelname)-8s %(message)s')
     console.setFormatter(formatter)
-    # Add the handler to the root logger
-    logging.getLogger('').addHandler(console)
-
-    logger = logging.getLogger(__name__)
+    # logging.getLogger('').addHandler(console)
+    logger.addHandler(console)
 
     logger.info("Logging initialized.")
 
@@ -78,8 +77,8 @@ def gpio_init():
 
 # Parses Ip's from dns lease file
 def get_nodes():
-    filename = '/var/lib/misc/dnsmasq.leases'
-    # filename = '/home/pi/python/dnsmasq.leases'
+    # filename = '/var/lib/misc/dnsmasq.leases'
+    filename = '/etc/carputer/nodes.config'
     nodes = []
     try:
         leasefile = list(open(filename, 'r').read().split('\n'))
