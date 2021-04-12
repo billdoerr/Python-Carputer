@@ -1,11 +1,19 @@
 # Changelog
-All notable changes to this Python Carputer project will be documented in this file.
+All notable changes to this Carputer Python code project will be documented in this file.
 File:  D:\Users\bdoerr\Development\Python\PycharmProjects\carputer\CHANGELOG.md
 
 
 ## [Unreleased]
 ### v1.x (NOT STARTED)
 #### Added
+#### Changed
+#### Removed
+
+
+## [Unreleased]
+### v1.2 (18Apr2021)
+#### Added
+- [x] juice4halt.py. This is a modified version of listen_for_shutdown.py where the code for the button push is removed.
 #### Changed
 #### Removed
 
@@ -23,6 +31,7 @@ File:  D:\Users\bdoerr\Development\Python\PycharmProjects\carputer\CHANGELOG.md
 - [x] listen_for_shutdown.py:  filename = '/var/lib/misc/dnsmasq.leases' does not contain ip's of nodes as expected.  Created filename = '/etc/carputer/nodes.config' which contains
                                single node '192.168.4.5' as temporary work around.  Python script changed to read the 'nodes' file instead of 'dnsmasq.leases'.
 #### Removed
+
 
 ## [Released]
 ### v1.0 (17May2019)
