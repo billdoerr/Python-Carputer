@@ -10,6 +10,18 @@ File:  D:\Users\bdoerr\Development\Python\PycharmProjects\carputer\CHANGELOG.md
 #### Removed
 
 
+
+## [Released]
+### v1.2.1 (9Jan2022)
+#### Added
+#### Changed 
+- [x] New timesync.sh. Resolves issue #6 (Camera-Rear node not syncing with master). SSH certificate not working for some reason. Modified script
+to run as a 'sudo crontab' and not as user 'pi'. Another script modification is to use the 'sshpass' package and just hardcode
+the password. Doesn't matter, RPi's have no security. 
+- [x] Update firmware version from v1.2 to v1.2.1.
+#### Removed
+
+
 ## [Unreleased]
 ### v1.2 (18Apr2021)
 #### Added
