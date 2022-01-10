@@ -1,21 +1,20 @@
 #! /bin/sh
 
 # /bin/timesync.sh
-# v1.1 24Dec2021
+# v1.1.1 9Jan2022
 
-# LOG_FILE=/var/log/timesync.log  # For debugging
-LOG_FILE=/tmp/timesync.log    # New file each reboot
-MASTER_UP=0
-sh -c 'echo "Waiting for master node..." >> LOG_FILE'
-while [ $MASTER_UP -ne 1 ]; do
+master_up=0
+sh -c 'echo "Waiting for master node..." >> /tmp/timesync.log'
+while [ $master_up -ne 1 ]; do
     ping -c 1 192.168.4.1
         if [ $? -eq  0 ]; then
-            sh -c 'echo -e "\nMaster node online!" >> LOG_FILE'
+            sh -c 'echo "Master node online!" >> /tmp/timesync.log'
             # Get date from master node and set date
-            sh -c 'echo "Time sync ->" >> LOG_FILE'
-            date -s "`sshpass -p 'scoobydoo' ssh pi@192.168.4.1 'date'`" >> LOG_FILE
-            MASTER_UP=1;
+            sh -c 'echo "Time sync ->" >> /tmp/timesync.log'
+            # sudo apt-get install sshpass
+            sudo date -s "`sshpass -p 'scoobydoo' ssh pi@192.168.4.1 'date'`" >> /tmp/timesync.log
+            master_up=1;
         else
-            sh -c 'echo -n "."  >> LOG_FILE'
+            sh -c 'echo -n "."  >> /tmp/timesync.log'
     fi
 done
