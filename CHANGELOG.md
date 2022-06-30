@@ -24,7 +24,7 @@ File:  D:\Users\bdoerr\Development\Python\PycharmProjects\carputer\CHANGELOG.md
 #### Removed
 
 
-## [Unreleased]
+## [Released]
 ### v1.2 (18Apr2021)
 #### Added
 - [x] juice4halt.py. This is a modified version of listen_for_shutdown.py where the code for the button push is removed.
